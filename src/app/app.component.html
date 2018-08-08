@@ -1,0 +1,33 @@
+
+<agm-map 
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="zoom"
+  [disableDefaultUI]="false"
+  [zoomControl]="false"
+  (mapClick)="mapClicked($event)">
+
+  <agm-marker 
+      *ngFor="let m of markers; let i = index"
+      (markerClick)="clickedMarker(m.label, i)"
+      [latitude]="m.lat"
+      [longitude]="m.lng"
+      [label]=""
+      [markerDraggable]="false"
+      [iconUrl]=icon
+      >
+      
+    <agm-info-window>
+      <strong [innerHTML]="vehicleInfo"></strong>
+    </agm-info-window>
+    
+  </agm-marker>
+  
+  <agm-circle *ngFor="let c of circles; let j = index"
+  [latitude]="c.lat" [longitude]="c.lng" 
+      [radius]="5000"
+      [fillColor]=c.heat
+      [circleDraggable]="false"
+      [editable]="false">
+  </agm-circle>
+</agm-map>
